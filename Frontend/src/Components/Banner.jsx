@@ -1,0 +1,46 @@
+import React from 'react'
+import video from '../../src/assets/Banner.mp4'
+
+function Banner() {
+  return (
+    <>
+      <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 flex flex-col md:flex-row mt-8">
+        <div className="md:w-1/2 w-full">
+          <div className="space-y-4">
+            <h1 className="font-jaini text-2xl font-bold">किताबो का संसार</h1>
+            <p className="text-gray-500">A ode to the traditional Sanskrit term for library,</p>
+            <p className="text-gray-500">reimagined for a digital bookstore with a touch of heritage.</p>
+          </div>
+          <div className='mt-4 relative z-10'>
+            <label className="input input-bordered flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="h-4 w-4 opacity-70">
+                <path
+                  d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+                <path
+                  d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+              </svg>
+              <input type="text" className="grow" placeholder="Enter your email to receive updates" />
+            </label>
+            <div className='mt-2'>
+              <button className="btn btn-outline btn-accent">SUBMIT</button>
+            </div>
+          </div>
+        </div>
+        <div className="w-full md:w-1/2 mt-8 md:mt-0 hidden lg:flex">
+          <video 
+            src={video} 
+            autoPlay 
+            muted 
+            className='w-full h-[400px] object-cover rounded-lg' 
+          />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Banner;

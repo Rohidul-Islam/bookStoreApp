@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "name": "Story Book",
+        "title": "Story Book",
+        "description": "Story Book",
+        "image": "Story book.jpg",
+        "price": 0,
+        "rating": 4.5,
+        "reviews": 0,
+        "category": "Free"
+    },
+    {
+        "id": 2,
+        "name": "Sports Book",
+        "title": "Sports Book",
+        "description": "Sports Book",
+        "image": "Sports book.jpg",
+        "price": 0,
+        "rating": 4.5,
+        "reviews": 0,
+        "category": "Free"
+    },
+    {
+        "id": 3,
+        "name": "Math Book",
+        "title": "Math Book",
+        "description": "Math Book",
+        "image": "Math book.jpg",
+        "price": 0,
+        "rating": 4.5,
+        "reviews": 0,
+        "category": "Free"
+    },
+    {
+        "id": 4,
+        "name": "Story Book",
+        "title": "Story Book",
+        "description": "Story Book",
+        "image": "Story book.jpg",
+        "price": 100,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "story"
+    },
+    {
+        "id": 5,
+        "name": "English Book",
+        "title": "English Book",
+        "description": "English Book",
+        "image": "English book.jpg",
+        "price": 0,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "Free"
+    },
+    {
+        "id": 6,
+        "name": "Story Book",
+        "title": "Story Book",
+        "description": "Story Book",
+        "image": "Story book.jpg",
+        "price": 100,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "story"
+    },
+    {
+        "id": 7,
+        "name": "Story Book",
+        "title": "Story Book",
+        "description": "Story Book",
+        "image": "Story book.jpg",
+        "price": 100,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "story"
+    },
+    {
+        "id": 8,
+        "name": "Story Book",
+        "title": "Story Book",
+        "description": "Story Book",
+        "image": "Story book.jpg",
+        "price": 100,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "story"
+    },
+    {
+        "id": 9,
+        "name": "Story Book",
+        "title": "Story Book",
+        "description": "Story Book",
+        "image": "Story book.jpg",
+        "price": 100,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "story"
+    },
+    {
+        "id": 10,
+        "name": "Comedy Book",
+        "title": "Comedy Book",
+        "description": "Comedy Book",
+        "image": "Comedy book.jpg",
+        "price": 0,
+        "rating": 4.5,
+        "reviews": 100,
+        "category": "Free"
+    }
+]
