@@ -12,13 +12,13 @@ function Cards({ daily }) {
   };
 
   return (
-    <div className="mt-4 my-3 p-3">
+    <div className="mt-4 my-1 mx-1 p-3">
       <div className="card w-92 bg-base-100 shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border">
         <figure>
           <img 
             src={getImagePath(daily.image)} 
             alt={daily.name}
-            className="w-full h-48 object-cover"
+            className="w-half h-48 object-cover"
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = '/default-book-cover.jpg'; // Add a default image in public folder
@@ -28,9 +28,9 @@ function Cards({ daily }) {
         <div className="card-body">
           <h2 className="card-title">
             {daily.name}
-            <div className="badge badge-secondary">NEW</div>
+            
           </h2>
-          <p>{daily.description}</p>
+          <p>{daily.title}</p>
           <div className="card-actions justify-between">
             <div className="badge badge-outline">Rs.{daily.price}</div>
             <div className="badge badge-outline hover:bg-pink-500 hover:text-white cursor-pointer">Buy Now</div>

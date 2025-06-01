@@ -27,7 +27,11 @@ function Genre() {
                     <span className='text-pink-500'>HERE! :)</span>
                 </h1>
                 <p className='mt-12'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit doloremque enim sunt dolores in, laboriosam libero ad cupiditate tempore ab nihil? Officiis quidem quasi laborum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, animi placeat pariatur fuga ad iste laudantium voluptas quidem. Quidem odio quia, accusamus minus odit ipsum!
+                Looking for something new? Browse by genre to uncover hidden gems and bestsellers across a variety of categories. Your next favorite book could be just a click away.
+                Explore our wide range of genres to discover books tailored to your preferences. Whether you're into fiction, romance, science, self-help, or technology — our categorized collection makes it easy to find what you love.
+                From thrilling mysteries to inspiring biographies and tech guides, there’s something for everyone.
+
+
                 </p>
                 <Link to="/">
                 <button className='mt-6 bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-700 duration-300'>BACK</button>

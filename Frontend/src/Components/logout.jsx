@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth } from '../context/AuthProvider';
 import toast from 'react-hot-toast';
-
+import { Link } from 'react-router-dom';
 function Logout() {
     const [authUser, setAuthUser]= useAuth()
     const handleLogout =() => {
@@ -23,10 +23,10 @@ function Logout() {
     }
   return (
     <div>
-        <button className="px-3 py-2 bg-green-600 text-white rounded-md cursour-pointer"
+        <Link to="/" className="px-2 py-1 bg-red-600 text-white rounded-md cursour-pointer"
         onClick={handleLogout}>
-            logout
-        </button>
+            Logout
+        </Link>
     </div>
   )
 }

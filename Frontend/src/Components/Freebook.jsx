@@ -66,8 +66,8 @@ function Freebook() {
         <>
             <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 mt-16">
                 <div>
-                    <h1 className="font-semibold text-xl pb-2">Free Book</h1>
-                    <p className="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                    <h1 className="font-semibold text-xl pb-2">Recommended Books</h1>
+                    <p className="text-gray-500">Our Recommended Books section features carefully selected titles based on popularity, ratings, and reader reviews. Whether you're new to reading or a seasoned bookworm, these selections are sure to spark your interest.</p>
                 </div>
 
                 <div className="mt-8">
