@@ -10,7 +10,7 @@ function Genre() {
     useEffect(() =>{
         const getBook=async() =>{
             try {
-           const res = await  axios.get("http://localhost:4001/book")
+           const res = await  axios.get("https://bookstoreapp-backend-15hd.onrender.com")
            console.log(res.data)
            setBook(res.data)
             } catch (error) {
