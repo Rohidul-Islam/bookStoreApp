@@ -13,40 +13,32 @@ export default function Login() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = async (data) => {
-        const userInfo = {
-            email: data.email,
-            password: data.password
-        }
-        try {
-            const res = await axios.post("http://localhost:4000/user/login", userInfo);
-            if (res.data) {
-                // Set the auth user state
-                setAuthUser({
-                    ...authUser,
-                    user: res.data.user
-                });
-                
-                // Store in localStorage
-                localStorage.setItem("Users", JSON.stringify(res.data.user));
-                
-                // Show success message
-                toast.success("Logged in Successfully");
-                
-                // Close the modal
-                document.getElementById('my_modal_1').close();
-                
-                // Reload after a short delay
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            }
-        } catch (err) {
-            console.error('Login error:', err);
-            toast.error("Error: " + (err.response?.data?.message || "Login failed"));
-        }
+    const onSubmit =async (data) => {
+        const userInfo={
+                    email:data.email,
+                    password:data.password
+                }
+              await  axios.post("https://bookstoreapp-backend1.onrender.com/user/login", userInfo)
+                .then((res) =>{
+                    console.log(res.data)
+                    if (res.data) {
+                      toast.success("Loggedin Successfully")
+                       document.getElementById('my_modal_1').close()
+                      setTimeout(() =>{
+                       
+                      window.location.reload();
+                    localStorage.setItem("Users", JSON.stringify(res.data.user));
+                      },1000)
+                    } 
+                })
+                .catch((err) =>{
+                    if (err.response) {
+                        console.log(err);
+                    toast.error("Error:" +err.response.data.message)
+                    setTimeout(() =>{},2000)
+                    }
+                })
     }
-
     return (
         <div>
             <dialog id="my_modal_1" className="modal">

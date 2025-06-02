@@ -14,13 +14,9 @@ function Freebook() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const res = await axios.get("http://localhost:4000/book");
-                console.log('API Response:', res.data);
-                if (Array.isArray(res.data)) {
-                    setBook(res.data.filter((data) => data.category === "Free"));
-                } else {
-                    setError('Invalid data format received from server');
-                }
+                const res = await axios.get("https://bookstoreapp-backend1.onrender.com/book");
+                setBook(res.data.filter((data) => data.category === "Free"));
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching books:', error);
                 setError(error.response?.data?.message || error.message || 'Failed to load books. Please try again later.');
@@ -28,7 +24,7 @@ function Freebook() {
                 setLoading(false);
             }
         };
-
+        
         fetchBooks();
     }, []);
 
