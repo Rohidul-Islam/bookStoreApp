@@ -13,11 +13,16 @@ function Genre() {
         const fetchBooks = async () => {
             try {
            const res = await  axios.get("https://bookstoreapp-backend1.onrender.com/book")
-           console.log(res.data)
-           setBook(res.data)
+          console.log('API Response:', res.data);
+                if (Array.isArray(res.data)) {
+                    setBook(res.data);
+                } else {
+                    setError('Invalid data format received from server');
+                }
             } catch (error) {
                 console.error('Error fetching books:', error);
                 setError('Failed to load books. Please try again later.');
+            } finally {
                 setLoading(false);
             }
         };
