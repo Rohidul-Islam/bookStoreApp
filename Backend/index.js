@@ -1,35 +1,30 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import cors from "cors";
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js"
+import { mongoDB } from "./config/db.js";   
 
-const app = express()
+// Load environment variables first
+dotenv.config();
 
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-dotenv.config();
-const PORT=process.env.PORT||4000;
-const URI = process.env.MongoDBURI;
+// Connect to MongoDB
+mongoDB().catch(err => {
+    console.error("Error connecting to MongoDB:", err);
+    process.exit(1);
+});
 
-//connect to mongoDB
-try {
-    mongoose.connect(URI,{
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-    console.log("connected to MongoDB");
-} catch (error) {
-    console.log("Error!", error); 
-}
-
-//definig route
-
-app.use("/book",bookRoute);
-app.use("/user",userRoute);
+// Routes
+app.use("/book", bookRoute);
+app.use("/user", userRoute);
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`)
+    console.log(`Server is listening on port ${PORT}`);
 });
