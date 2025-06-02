@@ -12,9 +12,9 @@ function Genre() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/book');
-                setBook(response.data);
-                setLoading(false);
+           const res = await  axios.get("http://localhost:4001/book")
+           console.log(res.data)
+           setBook(res.data)
             } catch (error) {
                 console.error('Error fetching books:', error);
                 setError('Failed to load books. Please try again later.');

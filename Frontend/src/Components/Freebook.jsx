@@ -7,20 +7,17 @@ import Cards from "./Cards";
 import axios from 'axios';
 
 function Freebook() {
-    const [book, setBook] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/book');
-                setBook(response.data.filter((data) => data.category === "Free"));
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching books:', error);
-                setError('Failed to load free books. Please try again later.');
-                setLoading(false);
+    const [book, setBook]=useState([])
+        useEffect(() =>{
+            const getBook=async() =>{
+                try {
+               const res = await  axios.get("http://localhost:4001/book")
+               
+               setBook(res.data.filter((data) => data.category === "Free"))
+               console.log(data)
+                } catch (error) {
+                    console.log(error)
+                }
             }
         };
 
