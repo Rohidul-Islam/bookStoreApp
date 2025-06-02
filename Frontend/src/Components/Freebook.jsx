@@ -7,17 +7,20 @@ import Cards from "./Cards";
 import axios from 'axios';
 
 function Freebook() {
-    const [book, setBook]=useState([])
-        useEffect(() =>{
-            const getBook=async() =>{
-                try {
-               const res = await  axios.get("http://localhost:4001/book")
-               
-               setBook(res.data.filter((data) => data.category === "Free"))
-               console.log(data)
-                } catch (error) {
-                    console.log(error)
-                }
+    const [book, setBook] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                const res = await axios.get("http://localhost:4001/book");
+                setBook(res.data.filter((data) => data.category === "Free"));
+                setLoading(false);
+            } catch (error) {
+                console.log(error);
+                setError(error.message);
+                setLoading(false);
             }
         };
 
