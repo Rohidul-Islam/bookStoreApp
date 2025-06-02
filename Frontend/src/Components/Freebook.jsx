@@ -2,28 +2,30 @@ import React from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Cards from "./Cards";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { data } from 'react-router-dom';
-
+import axios from 'axios';
 
 function Freebook() {
-    const [book, setBook]=useState([])
-        useEffect(() =>{
-            const getBook=async() =>{
-                try {
-               const res = await  axios.get("http://localhost:4001/book")
-               
-               setBook(res.data.filter((data) => data.category === "Free"))
-               console.log(data)
-                } catch (error) {
-                    console.log(error)
-                }
+    const [book, setBook] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/book');
+                setBook(response.data.filter((data) => data.category === "Free"));
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching books:', error);
+                setError('Failed to load free books. Please try again later.');
+                setLoading(false);
             }
-            getBook();
-        },[])
+        };
+
+        fetchBooks();
+    }, []);
 
     var settings = {
         dots: true,
@@ -62,6 +64,15 @@ function Freebook() {
             }
         ]
     };
+
+    if (loading) {
+        return <div className="text-center mt-16">Loading free books...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center mt-16 text-red-500">{error}</div>;
+    }
+
     return (
         <>
             <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 mt-16">
@@ -71,11 +82,15 @@ function Freebook() {
                 </div>
 
                 <div className="mt-8">
-                    <Slider {...settings}>
-                        {book.map((item) => (
-                            <Cards daily={item} key={item.id} />
-                        ))}
-                    </Slider>
+                    {book.length === 0 ? (
+                        <div className="text-center text-gray-500">No free books available</div>
+                    ) : (
+                        <Slider {...settings}>
+                            {book.map((item) => (
+                                <Cards daily={item} key={item._id} />
+                            ))}
+                        </Slider>
+                    )}
                 </div>
             </div>
         </>
@@ -83,3 +98,4 @@ function Freebook() {
 }
 
 export default Freebook;
+
