@@ -12,12 +12,17 @@ function Genre() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-           const res = await  axios.get("http://localhost:4001/book")
-           console.log(res.data)
-           setBook(res.data)
+                const res = await axios.get("http://localhost:4000/book");
+                console.log('API Response:', res.data);
+                if (Array.isArray(res.data)) {
+                    setBook(res.data);
+                } else {
+                    setError('Invalid data format received from server');
+                }
             } catch (error) {
                 console.error('Error fetching books:', error);
                 setError('Failed to load books. Please try again later.');
+            } finally {
                 setLoading(false);
             }
         };
@@ -26,7 +31,7 @@ function Genre() {
     }, []);
 
     if (loading) {
-        return <div className="text-center mt-28">Loading books...</div>;
+        return <div className="text-center mt-28">Loading books.....</div>;
     }
 
     if (error) {
