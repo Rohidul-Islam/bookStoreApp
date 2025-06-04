@@ -8,8 +8,10 @@ function Banner() {
         <div className="md:w-1/2 w-full">
           <div className="space-y-4">
             <h1 className="font-jaini text-2xl font-bold">किताबो का संसार</h1>
-            <p className="text-gray-500">A ode to the traditional Sanskrit term for library,</p>
-            <p className="text-gray-500">reimagined for a digital bookstore with a touch of heritage.</p>
+            <p className="text-gray-500">A ode to the traditional Sanskrit term for library,
+            <br />
+              reimagined for a digital bookstore with a touch of heritage.
+            </p>
           </div>
           <div className='mt-4 relative z-10'>
             <label className="input input-bordered flex items-center gap-2">
