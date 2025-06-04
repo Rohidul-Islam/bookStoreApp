@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+const VALID_GENRES = ['fiction', 'novel', 'non-fiction', 'mystery', 'romance', 'science', 'technology'];
+
 const bookSchema = mongoose.Schema({
     name: {
         type: String,
@@ -32,6 +34,18 @@ const bookSchema = mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    genre: {
+        type: String,
+        required: true,
+        enum: {
+            values: VALID_GENRES,
+            message: 'Invalid genre. Must be one of: ' + VALID_GENRES.join(', ')
+        },
+        set: function(value) {
+            // Convert to lowercase before saving
+            return value.toLowerCase().trim();
+        }
     }
 }, {
     timestamps: true

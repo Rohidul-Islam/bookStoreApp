@@ -1,58 +1,5 @@
 import Book from "../model/book.model.js";
 
-const initialBooks = [
-    {
-        name: "The Catch-22",
-        title: "A Masterpiece of American Literature",
-        description: "A satirical war novel by Joseph Heller",
-        image: "Catch.jpg",
-        price: 0,
-        rating: 4.5,
-        reviews: 0,
-        category: "Free"
-    },
-    {
-        name: "Norwegian Wood",
-        title: "A Modern Classic",
-        description: "A nostalgic story of loss and sexuality by Haruki Murakami",
-        image: "Norewegian.jpg",
-        price: 0,
-        rating: 4.5,
-        reviews: 0,
-        category: "Free"
-    },
-    {
-        name: "The Three-Body Problem",
-        title: "Science Fiction Masterpiece",
-        description: "Award-winning Chinese science fiction",
-        image: "Three.jpg",
-        price: 0,
-        rating: 4.5,
-        reviews: 0,
-        category: "Free"
-    },
-    {
-        name: "A Thousand Splendid Suns",
-        title: "Moving Tale of Afghanistan",
-        description: "A gripping story of family, love, and redemption",
-        image: "Thousand.jpg",
-        price: 100,
-        rating: 4.5,
-        reviews: 100,
-        category: "story"
-    },
-    {
-        name: "The Forty Rules of Love",
-        title: "A Novel of Rumi",
-        description: "A spiritual journey through time",
-        image: "Forty Rules.jpg",
-        price: 0,
-        rating: 4.5,
-        reviews: 100,
-        category: "Free"
-    }
-];
-
 export const getBook = async (req, res) => {
     try {
         const books = await Book.find();
@@ -63,21 +10,102 @@ export const getBook = async (req, res) => {
     }
 };
 
-export const populateBooks = async (req, res) => {
+export const addBook = async (req, res) => {
     try {
-        // First, clear existing books
-        await Book.deleteMany({});
+        const { name, title, description, image, price, category, genre } = req.body;
         
-        // Insert initial books
-        const books = await Book.insertMany(initialBooks);
-        
+        // Validate required fields
+        if (!name || !title || !description || !image || !price || !category || !genre) {
+            return res.status(400).json({
+                message: "Missing required fields",
+                required: ["name", "title", "description", "image", "price", "category", "genre"]
+            });
+        }
+
+        const newBook = new Book({
+            name,
+            title,
+            description,
+            image,
+            price: Number(price),
+            category,
+            genre,
+            rating: 0,
+            reviews: 0
+        });
+
+        const savedBook = await newBook.save();
         res.status(201).json({
-            message: "Books populated successfully",
-            count: books.length,
-            books
+            message: "Book added successfully",
+            book: savedBook
         });
     } catch (error) {
-        console.error("Error populating books:", error);
-        res.status(500).json({ message: "Error populating books", error: error.message });
+        console.error("Error adding book:", error);
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                message: "Validation error",
+                errors: Object.keys(error.errors).reduce((acc, key) => {
+                    acc[key] = error.errors[key].message;
+                    return acc;
+                }, {})
+            });
+        }
+        res.status(500).json({ message: "Error adding book", error: error.message });
+    }
+};
+
+export const updateBook = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updates = req.body;
+
+        // Validate the updates
+        if (updates.price) {
+            updates.price = Number(updates.price);
+        }
+
+        const updatedBook = await Book.findByIdAndUpdate(
+            id, 
+            updates,
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedBook) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+
+        res.status(200).json({
+            message: "Book updated successfully",
+            book: updatedBook
+        });
+    } catch (error) {
+        console.error("Error updating book:", error);
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                message: "Validation error",
+                errors: Object.keys(error.errors).reduce((acc, key) => {
+                    acc[key] = error.errors[key].message;
+                    return acc;
+                }, {})
+            });
+        }
+        res.status(500).json({ message: "Error updating book", error: error.message });
+    }
+};
+
+export const deleteBook = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedBook = await Book.findByIdAndDelete(id);
+        if (!deletedBook) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+        res.status(200).json({
+            message: "Book deleted successfully",
+            book: deletedBook
+        });
+    } catch (error) {
+        console.error("Error deleting book:", error);
+        res.status(500).json({ message: "Error deleting book", error: error.message });
     }
 };
