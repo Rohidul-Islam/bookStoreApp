@@ -6,7 +6,7 @@ function Contacts() {
     return (
       <>
       <Navbar/>
-      <div className='min-h-screen'>
+      <div className='min-h-screen pt-20'>
       <Contact/>
       </div>
       <Footer/>

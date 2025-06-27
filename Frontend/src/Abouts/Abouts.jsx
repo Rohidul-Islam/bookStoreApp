@@ -6,7 +6,7 @@ function Abouts() {
   return (
     <>
     <Navbar/>
-    <div className='min-h-screen'>
+    <div className='min-h-screen pt-20'>
     <About/>
     </div>
     <Footer/>

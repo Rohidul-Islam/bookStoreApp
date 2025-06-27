@@ -1,10 +1,116 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Jaini&family=Poppins:wght@500&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 @tailwind base;
 @tailwind components;
-
 @tailwind utilities;
 
-body{
-  font-family: 'Poppins', sans-serif;
+:root, [data-theme='light'] {
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  --text-color: #22223b;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.18);
+  --input-bg: rgba(255, 255, 255, 0.7);
+  --input-text: #232946;
+  --input-border: 1.5px solid #a7bfff; /* primary-light */
+}
+
+[data-theme='dark'] {
+  --bg-gradient: linear-gradient(135deg, #181a2a 0%, #232946 100%);
+  --text-color: #f4f4f4;
+  --glass-bg: rgba(36, 41, 61, 0.75);
+  --glass-border: 1.5px solid rgba(99, 102, 241, 0.25);
+  --input-bg: rgba(36, 41, 61, 0.85);
+  --input-text: #f4f4f4;
+  --input-border: 1.5px solid #6366f1; /* primary */
+}
+
+body {
+  position: relative;
+  z-index: 0;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  color: hsl(var(--bc) / var(--tw-text-opacity, 1));
+  min-height: 100vh;
+  transition: background 0.5s, color 0.5s;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #181a2a 0%, #232946 100%);
+  color: #f4f4f4;
+}
+
+#root > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Overlay for video background */
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 20, 30, 0.45);
+  z-index: 0;
+  pointer-events: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.glass {
+  background: var(--glass-bg);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: var(--glass-border);
+}
+
+.dark .glass {
+  background: rgba(36, 41, 61, 0.75);
+  border: 1.5px solid rgba(99,102,241,0.25);
+  box-shadow: 0 8px 32px 0 rgba(99,102,241,0.18);
+  color: #f4f4f4;
+}
+
+.btn-primary {
+  @apply bg-primary text-white rounded-full shadow-lg hover:bg-primary-dark transition;
+}
+
+.btn-accent {
+  @apply bg-accent text-white rounded-full shadow-lg hover:bg-accent-dark transition;
+}
+
+input, textarea {
+  @apply rounded-lg border focus:ring-2 focus:ring-primary focus:outline-none transition;
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: var(--input-border);
+}
+
+.dark input, .dark textarea {
+  background: rgba(36, 41, 61, 0.85);
+  color: #f4f4f4;
+  border: 1.5px solid #6366f1;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-pink-400 {
+  scrollbar-color: #f472b6 #e5e7eb;
+}
+
+.scrollbar-track-gray-200 {
+  scrollbar-color: #e5e7eb #fff;
+}
+
+html {
+  scroll-behavior: smooth;
 }

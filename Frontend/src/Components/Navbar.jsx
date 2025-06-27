@@ -8,6 +8,7 @@ import UserProfile from './UserProfile';
 function Navbar() {
   const [authUser, setAuthUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     // Check for user data in localStorage on component mount
@@ -39,9 +40,9 @@ function Navbar() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-base-100 z-50">
+      <div className="fixed top-0 left-0 right-0 glass backdrop-blur-md border-b border-primary/20 shadow-glass z-50 transition-all duration-300">
         <div className="container mx-auto px-0 sm:px-4 lg:px-20">
-          <div className="navbar p-0 sm:p-4">
+          <div className="navbar p-0 sm:p-4 flex items-center justify-between">
             <div className="navbar-start">
               <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden pl-2">
@@ -60,18 +61,18 @@ function Navbar() {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  className="menu menu-sm dropdown-content glass backdrop-blur-md border border-primary/10 rounded-box z-[1] mt-3 w-52 p-2 shadow-glass">
                   {navItems}
                 </ul>
               </div>
-              <Link to={"/"} className="font-poppins font-bold text-xl sm:text-2xl cursor-pointer">
+              <Link to={"/"} className="font-poppins font-bold text-2xl sm:text-3xl cursor-pointer text-primary drop-shadow-glow">
                 Granthalaya
               </Link>
             </div>
 
             {/* Center section - visible only on large screens */}
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1">
+              <ul className="menu menu-horizontal px-1 text-lg font-semibold">
                 {navItems}
               </ul>
             </div>
@@ -83,7 +84,7 @@ function Navbar() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="px-2 py-1 border-2 border rounded-md input-success w-full max-w-xs outline-none"
+                  className="px-2 py-1 border-2 border-primary-light rounded-lg input-success w-full max-w-xs outline-none"
                 />
               </div>
 
@@ -113,7 +114,7 @@ function Navbar() {
               <Link to="/cart" className="relative">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 hover:text-gray-700 duration-200"
+                  className="h-6 w-6 hover:text-primary duration-200"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor">
@@ -124,8 +125,8 @@ function Navbar() {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  0
+                <span className="absolute -top-2 -right-2 bg-accent text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartCount}
                 </span>
               </Link>
 
@@ -133,20 +134,17 @@ function Navbar() {
               {authUser?.user ? (
                 <>
                   <button 
-                    className="p-2 hover:bg-gray-100 rounded-full transition duration-300"
+                    className="p-2 hover:bg-primary/10 rounded-full transition duration-300"
                     onClick={() => {
                       const modal = document.getElementById('user_profile_modal');
                       if (modal) {
-                        console.log('Opening user profile modal');
                         modal.showModal();
-                      } else {
-                        console.error('User profile modal not found');
                       }
                     }}
                   >
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
-                      className="h-6 w-6 text-gray-700" 
+                      className="h-6 w-6 text-primary" 
                       fill="none" 
                       viewBox="0 0 24 24" 
                       stroke="currentColor"
@@ -164,7 +162,7 @@ function Navbar() {
               ) : (
                 <div>
                   <a 
-                    className="bg-black text-white px-2 py-1 rounded-md hover:bg-gray-800 duration-300 cursor-pointer"
+                    className="bg-primary text-white px-2 py-1 rounded-full hover:bg-primary-dark duration-300 cursor-pointer"
                     onClick={() => document.getElementById('my_modal_1').showModal()}
                   >
                     Login

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Cards({ daily }) {
+function Cards({ daily, onAddToCart }) {
   // Function to get the correct image path
   const getImagePath = (image) => {
     try {
@@ -12,9 +12,9 @@ function Cards({ daily }) {
   };
 
   return (
-    <div className="mt-4 my-1 mx-1 p-3">
-      <div className="card bg-base-100 shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border h-[420px]">
-        <figure className="h-[300px] w-full">
+    <div className="mt-4 my-1 mx-1 p-3 fade-in-up">
+      <div className="card glass shadow-glass hover:scale-105 hover:shadow-glow duration-300 h-[420px] rounded-2xl border border-primary/10">
+        <figure className="h-[260px] w-full rounded-xl overflow-hidden">
           <img 
             src={getImagePath(daily.image)} 
             alt={daily.name}
@@ -25,14 +25,19 @@ function Cards({ daily }) {
             }}
           />
         </figure>
-        <div className="card-body p-3 h-[120px]">
-          <h2 className="card-title text-base font-bold line-clamp-1 mb-1">
-            {daily.name}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-2">{daily.title}</p>
-          <div className="card-actions justify-between">
-            <div className="badge badge-outline text-sm">Rs.{daily.price}</div>
-            <div className="badge badge-outline hover:bg-pink-500 hover:text-white cursor-pointer text-sm">Buy Now</div>
+        <div className="card-body p-4 h-[160px] flex flex-col justify-between">
+          <div>
+            <h2 className="card-title text-lg font-bold line-clamp-1 mb-1 text-primary drop-shadow-glow">
+              {daily.name}
+            </h2>
+            <p className="text-sm line-clamp-2 mb-2">{daily.title}</p>
+          </div>
+          <div className="card-actions flex justify-between items-center mt-2">
+            <div className="text-accent font-bold text-base">Rs.{daily.price}</div>
+            <div className="flex gap-2">
+              
+              <button className="btn btn-accent px-4 py-1 text-sm" style={{minWidth:'80px'}} onClick={() => onAddToCart && onAddToCart(daily)}>Add to Cart</button>
+            </div>
           </div>
         </div>
       </div>
